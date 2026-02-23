@@ -1,0 +1,131 @@
+{% extends 'hospital/base.html' %}
+{% block title %}MedVita Hospital - World Class Healthcare{% endblock %}
+{% block extra_css %}
+<style>
+.hero{min-height:92vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--navy) 0%,#1a4a8a 60%,#0d3a6a 100%);position:relative;overflow:hidden}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.hero-content h1{color:#0d2545;margin-bottom:20px}
+.hero-content h1 span{color:var(--gold)}
+.hero-content p{color:rgba(255,255,255,.8);font-size:18px;margin-bottom:36px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.15)}
+.hero-stat .num{font-size:2rem;font-weight:700;color:var(--gold);font-family:var(--font-display)}
+.hero-stat .lbl{font-size:13px;color:rgba(255,255,255,.7);margin-top:2px}
+.trust-bar{background:var(--cream);padding:28px 0}
+.trust-bar .container{display:flex;align-items:center;justify-content:space-around;gap:24px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:12px}
+.trust-item .icon{font-size:1.8rem}
+.trust-item .text strong{display:block;font-size:15px;color:var(--navy)}
+.trust-item .text span{font-size:13px;color:var(--gray-500)}
+.doctor-card{text-align:center;padding:32px 24px}
+.doctor-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;margin:0 auto 16px;overflow:hidden}
+.doctor-avatar img{width:100%;height:100%;object-fit:cover}
+.doctor-card h3{font-size:1.1rem;color:var(--navy);margin-bottom:6px}
+.doctor-card .spec{font-size:13px;color:var(--teal);font-weight:600;margin-bottom:10px}
+.doctor-card .exp{font-size:13px;color:var(--gray-500)}
+.stars{color:var(--gold);font-size:14px}
+.service-card{padding:32px 24px}
+.service-card .icon-wrap{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#e0f5f5,#b8ecec);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:18px}
+.service-card h3{color:var(--navy);margin-bottom:10px;font-size:1.1rem}
+.cta-section{background:linear-gradient(135deg,var(--teal) 0%,#0a6f6f 100%);padding:90px 0;text-align:center;color:#fff}
+.cta-section h2{color:#fff;margin-bottom:16px}
+.cta-section p{color:rgba(255,255,255,.85);font-size:18px;margin-bottom:36px}
+</style>
+{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(15,138,138,.15);color:#16b1b1;padding:8px 18px;border-radius:50px;font-size:14px;font-weight:500;margin-bottom:24px;">
+        &#127942; #1 Rated Hospital in the Region
+      </div>
+      <h1>Your Health is Our <span>Greatest</span> Priority</h1>
+      <p>World-class medical care with compassion and expertise. Over 200 specialist doctors ready to serve you.</p>
+      <div class="hero-actions">
+        <a href="/appointments/book/" class="btn btn-gold" style="font-size:16px;padding:16px 36px;">&#128197; Book Appointment</a>
+        <a href="/doctors/" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5);">Meet Our Doctors</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">28+</div><div class="lbl">Years of Excellence</div></div>
+        <div class="hero-stat"><div class="num">200+</div><div class="lbl">Specialist Doctors</div></div>
+        <div class="hero-stat"><div class="num">50K+</div><div class="lbl">Patients Served</div></div>
+        <div class="hero-stat"><div class="num">98%</div><div class="lbl">Patient Satisfaction</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-item"><div class="icon">&#127885;</div><div class="text"><strong>JCI Accredited</strong><span>International Standards</span></div></div>
+    <div class="trust-item"><div class="icon">&#9200;</div><div class="text"><strong>24/7 Emergency</strong><span>Always Available</span></div></div>
+    <div class="trust-item"><div class="icon">&#128300;</div><div class="text"><strong>Advanced Labs</strong><span>Latest Technology</span></div></div>
+    <div class="trust-item"><div class="icon">&#128657;</div><div class="text"><strong>Ambulance Service</strong><span>Quick Response</span></div></div>
+    <div class="trust-item"><div class="icon">&#128138;</div><div class="text"><strong>24h Pharmacy</strong><span>In-House</span></div></div>
+  </div>
+</div>
+<section class="section" style="background:var(--gray-50);">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Our Team</span>
+      <h2>Meet Our Specialist Doctors</h2>
+      <p>Trained at top institutions worldwide with decades of experience.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="grid-3">
+      {% for doctor in featured_doctors %}
+      <div class="card doctor-card">
+        <div class="doctor-avatar">
+          {% if doctor.profile_image %}<img src="{{ doctor.profile_image.url }}" alt="{{ doctor.full_name }}">{% else %}&#128104;&#8205;&#9877;{% endif %}
+        </div>
+        <h3>{{ doctor.full_name }}</h3>
+        <div class="spec">{{ doctor.specialization }}</div>
+        <div class="exp">{{ doctor.experience_years }} years experience</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div style="font-weight:600;color:var(--navy);font-size:15px;margin:12px 0;">Consultation: ${{ doctor.consultation_fee }}</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
+          <a href="/doctors/{{ doctor.id }}/" class="btn btn-outline btn-sm">View Profile</a>
+          <a href="/appointments/book/?doctor={{ doctor.id }}" class="btn btn-primary btn-sm">Book</a>
+        </div>
+      </div>
+      {% empty %}
+      <div style="grid-column:1/-1;text-align:center;padding:60px 20px;">
+        <div style="font-size:4rem;margin-bottom:16px;">&#128104;&#8205;&#9877;</div>
+        <p style="font-size:18px;color:var(--gray-500);">Add doctors via the <a href="/admin/" style="color:var(--teal);">Admin Panel</a></p>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="/doctors/" class="btn btn-navy">View All Doctors &rarr;</a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">What We Offer</span>
+      <h2>Our Medical Services</h2>
+      <p>Comprehensive healthcare across 20+ specialties with advanced technology.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="grid-4">
+      <div class="card service-card"><div class="icon-wrap">&#129728;</div><h3>Cardiology</h3><p>Advanced cardiac diagnostics and surgery.</p></div>
+      <div class="card service-card"><div class="icon-wrap">&#129504;</div><h3>Neurology</h3><p>Brain and nervous system care.</p></div>
+      <div class="card service-card"><div class="icon-wrap">&#129460;</div><h3>Orthopedics</h3><p>Bone, joint and musculoskeletal treatments.</p></div>
+      <div class="card service-card"><div class="icon-wrap">&#129770;</div><h3>General Medicine</h3><p>Primary and preventive healthcare.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="/services/" class="btn btn-outline">Explore All Services &rarr;</a>
+    </div>
+  </div>
+</section>
+<div class="cta-section">
+  <div class="container">
+    <h2>Ready to Take Charge of Your Health?</h2>
+    <p>Book an appointment with our specialists today. Same-day appointments available.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/appointments/book/" class="btn btn-gold" style="font-size:16px;padding:16px 36px;">&#128197; Book Appointment Now</a>
+      <a href="/contact/" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5);">Contact Us</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

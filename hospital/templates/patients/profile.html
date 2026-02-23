@@ -1,0 +1,53 @@
+{% extends 'hospital/base.html' %}
+{% block title %}My Profile - MedVita{% endblock %}
+{% block content %}
+<div style="background:linear-gradient(135deg,var(--navy),#1a4a8a);padding:40px 0;color:#fff;">
+  <div class="container"><h2 style="color:#fff;">My Profile</h2><p style="color:rgba(255,255,255,.75);">Manage your personal and medical information</p></div>
+</div>
+<section class="section-sm">
+  <div class="container">
+    <div class="dashboard-grid">
+      <aside class="sidebar">
+        <div style="padding:20px 24px;border-bottom:1px solid var(--gray-100);margin-bottom:8px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:10px;">&#128100;</div>
+          <div style="font-weight:600;color:var(--navy);font-size:15px;">{{ patient.full_name }}</div>
+          <div style="font-size:12px;color:var(--gray-500);">Patient ID: #{{ patient.id }}</div>
+        </div>
+        <ul class="sidebar-nav">
+          <li><a href="/patients/dashboard/">&#127968; Dashboard</a></li>
+          <li><a href="/patients/profile/" class="active">&#128100; My Profile</a></li>
+          <li><a href="/appointments/my/">&#128197; My Appointments</a></li>
+          <li><a href="/reports/">&#128203; Medical Reports</a></li>
+          <li><a href="/appointments/book/">&#10133; Book Appointment</a></li>
+          <li><a href="/patients/logout/" style="color:var(--danger);">&#128682; Logout</a></li>
+        </ul>
+      </aside>
+      <main>
+        <div class="card" style="padding:40px;">
+          <h3 style="color:var(--navy);margin-bottom:28px;">Edit Profile</h3>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-group"><label>First Name</label><input type="text" name="first_name" class="form-control" value="{{ patient.user.first_name }}"></div>
+              <div class="form-group"><label>Last Name</label><input type="text" name="last_name" class="form-control" value="{{ patient.user.last_name }}"></div>
+              <div class="form-group"><label>Phone</label><input type="tel" name="phone" class="form-control" value="{{ patient.phone }}"></div>
+              <div class="form-group"><label>Date of Birth</label><input type="date" name="date_of_birth" class="form-control" value="{{ patient.date_of_birth|date:'Y-m-d' }}"></div>
+              <div class="form-group"><label>Gender</label><select name="gender" class="form-control"><option value="">Select</option><option value="M" {% if patient.gender == "M" %}selected{% endif %}>Male</option><option value="F" {% if patient.gender == "F" %}selected{% endif %}>Female</option><option value="O" {% if patient.gender == "O" %}selected{% endif %}>Other</option></select></div>
+              <div class="form-group"><label>Blood Group</label><select name="blood_group" class="form-control"><option value="">Select</option>{% for val,label in patient.BLOOD_GROUP_CHOICES %}<option value="{{ val }}" {% if patient.blood_group == val %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+            </div>
+            <div class="form-group"><label>Address</label><textarea name="address" class="form-control" rows="3" style="resize:vertical;">{{ patient.address }}</textarea></div>
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-group"><label>Emergency Contact Name</label><input type="text" name="emergency_contact_name" class="form-control" value="{{ patient.emergency_contact_name }}"></div>
+              <div class="form-group"><label>Emergency Contact Phone</label><input type="tel" name="emergency_contact_phone" class="form-control" value="{{ patient.emergency_contact_phone }}"></div>
+            </div>
+            <div class="form-group"><label>Known Allergies</label><textarea name="allergies" class="form-control" rows="3" style="resize:vertical;" placeholder="List any known allergies...">{{ patient.allergies }}</textarea></div>
+            <div class="form-group"><label>Medical History</label><textarea name="medical_history" class="form-control" rows="3" style="resize:vertical;" placeholder="Relevant medical history...">{{ patient.medical_history }}</textarea></div>
+            <div class="form-group"><label>Profile Photo</label><input type="file" name="profile_image" class="form-control" accept="image/*"></div>
+            <button type="submit" class="btn btn-primary" style="padding:14px 40px;">Save Changes</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+{% endblock %}

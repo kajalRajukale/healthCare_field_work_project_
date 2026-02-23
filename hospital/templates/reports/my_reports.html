@@ -1,0 +1,37 @@
+{% extends 'hospital/base.html' %}
+{% block title %}My Medical Reports - MedVita{% endblock %}
+{% block content %}
+<div style="background:linear-gradient(135deg,var(--navy),#1a4a8a);padding:40px 0;color:#fff;">
+  <div class="container"><h2 style="color:#fff;">My Medical Reports</h2><p style="color:rgba(255,255,255,.75);">Access and download your medical records</p></div>
+</div>
+<section class="section-sm">
+  <div class="container">
+    <div class="card">
+      {% if reports %}
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Title</th><th>Type</th><th>Date</th><th>Doctor</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for report in reports %}
+            <tr>
+              <td><strong>{{ report.title }}</strong><br><span style="font-size:12px;color:var(--gray-500);">{{ report.description|truncatechars:40 }}</span></td>
+              <td><span class="badge badge-navy">{{ report.get_report_type_display }}</span></td>
+              <td>{{ report.report_date }}</td>
+              <td>{{ report.doctor.full_name|default:"--" }}</td>
+              <td><a href="/reports/{{ report.id }}/download/" class="btn btn-outline btn-sm">&#128229; Download</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div style="padding:60px;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:16px;">&#128203;</div>
+        <h3 style="color:var(--navy);margin-bottom:10px;">No medical reports yet</h3>
+        <p style="color:var(--gray-500);">Reports uploaded by your doctor will appear here.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

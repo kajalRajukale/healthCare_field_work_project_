@@ -1,0 +1,46 @@
+{% extends 'hospital/base.html' %}
+{% block title %}{{ doctor.full_name }} - MedVita{% endblock %}
+{% block content %}
+<div class="page-hero"><div class="container"><h1>{{ doctor.full_name }}</h1><p>{{ doctor.specialization }}</p><div class="breadcrumb"><a href="/">Home</a> / <a href="/doctors/">Doctors</a> / {{ doctor.full_name }}</div></div></div>
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:48px;align-items:start;">
+      <div class="card" style="padding:40px;text-align:center;">
+        <div style="width:150px;height:150px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy));display:flex;align-items:center;justify-content:center;font-size:4rem;color:#fff;margin:0 auto 20px;overflow:hidden;">
+          {% if doctor.profile_image %}<img src="{{ doctor.profile_image.url }}" alt="{{ doctor.full_name }}" style="width:100%;height:100%;object-fit:cover;">{% else %}&#128104;&#8205;&#9877;{% endif %}
+        </div>
+        <h2 style="color:var(--navy);margin-bottom:6px;">{{ doctor.full_name }}</h2>
+        <p style="color:var(--teal);font-weight:600;margin-bottom:8px;">{{ doctor.specialization }}</p>
+        <div style="color:var(--gold);font-size:18px;margin-bottom:16px;">&#9733;&#9733;&#9733;&#9733;&#9733; {{ doctor.rating }}</div>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+          <span class="badge badge-teal">{{ doctor.experience_years }} Years Exp</span>
+          {% if doctor.department %}<span class="badge badge-navy">{{ doctor.department.name }}</span>{% endif %}
+        </div>
+        <div style="background:var(--cream);border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:var(--gray-500);">Consultation Fee</span><strong style="color:var(--navy);">${{ doctor.consultation_fee }}</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:var(--gray-500);">Available Days</span><strong style="color:var(--navy);">{{ doctor.available_days|default:"Mon-Fri" }}</strong></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;"><span style="color:var(--gray-500);">Timing</span><strong style="color:var(--navy);">{{ doctor.available_from }} - {{ doctor.available_to }}</strong></div>
+        </div>
+        <a href="/appointments/book/?doctor={{ doctor.id }}" class="btn btn-primary" style="width:100%;justify-content:center;">&#128197; Book Appointment</a>
+      </div>
+      <div>
+        <div class="card" style="padding:32px;margin-bottom:24px;">
+          <h3 style="color:var(--navy);margin-bottom:16px;">About Dr. {{ doctor.last_name }}</h3>
+          <p>{{ doctor.bio|default:"Experienced specialist dedicated to providing the highest quality of medical care to all patients." }}</p>
+        </div>
+        <div class="card" style="padding:32px;margin-bottom:24px;">
+          <h3 style="color:var(--navy);margin-bottom:16px;">Qualifications</h3>
+          <p style="color:var(--gray-700);">{{ doctor.qualification|default:"MBBS, MD - Specialized training from top medical institutions." }}</p>
+        </div>
+        <div class="card" style="padding:32px;">
+          <h3 style="color:var(--navy);margin-bottom:16px;">Contact &amp; Availability</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;">
+            {% if doctor.email %}<div style="display:flex;gap:10px;align-items:center;"><span style="color:var(--teal);">&#9993;</span><span>{{ doctor.email }}</span></div>{% endif %}
+            {% if doctor.phone %}<div style="display:flex;gap:10px;align-items:center;"><span style="color:var(--teal);">&#128222;</span><span>{{ doctor.phone }}</span></div>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'hospital/base.html' %}
+{% block title %}About Us - MedVita Hospital{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1>About MedVita Hospital</h1>
+    <p>Dedicated to healing, innovation, and exceptional patient care since 1995</p>
+    <div class="breadcrumb"><a href="/">Home</a> / About Us</div>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:60px;align-items:center;">
+      <div>
+        <span style="font-size:13px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);">Our Story</span>
+        <h2 style="color:var(--navy);margin:12px 0 20px;">Building Trust Through Excellence Since 1995</h2>
+        <p style="margin-bottom:16px;">MedVita Hospital was founded with a singular vision: to deliver world-class medical care with genuine human compassion. What started as a small 50-bed facility has grown into a 500-bed, multi-specialty tertiary care center.</p>
+        <p style="margin-bottom:16px;">Over 28 years, we have served more than 50,000 patients and performed over 20,000 successful surgeries. Our team of 200+ specialist doctors work together around the clock.</p>
+        <p>We are internationally accredited by JCI and recognized for excellence in patient safety and quality care.</p>
+        <div style="display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;">
+          <a href="/appointments/book/" class="btn btn-primary">Book Appointment</a>
+          <a href="/contact/" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,#e0f5f5,#b8ecec);border-radius:20px;padding:40px;text-align:center;">
+        <div style="font-size:5rem;margin-bottom:16px;">&#127973;</div>
+        <div class="grid-2" style="gap:16px;">
+          <div style="background:#fff;border-radius:12px;padding:20px;text-align:center;"><div style="font-size:1.8rem;font-weight:700;color:var(--navy);font-family:var(--font-display);">500+</div><div style="font-size:13px;color:var(--gray-500);">Beds</div></div>
+          <div style="background:#fff;border-radius:12px;padding:20px;text-align:center;"><div style="font-size:1.8rem;font-weight:700;color:var(--navy);font-family:var(--font-display);">{{ doctors_count }}+</div><div style="font-size:13px;color:var(--gray-500);">Doctors</div></div>
+          <div style="background:#fff;border-radius:12px;padding:20px;text-align:center;"><div style="font-size:1.8rem;font-weight:700;color:var(--navy);font-family:var(--font-display);">20+</div><div style="font-size:13px;color:var(--gray-500);">Specialties</div></div>
+          <div style="background:#fff;border-radius:12px;padding:20px;text-align:center;"><div style="font-size:1.8rem;font-weight:700;color:var(--navy);font-family:var(--font-display);">98%</div><div style="font-size:13px;color:var(--gray-500);">Satisfaction</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" style="background:var(--gray-50);">
+  <div class="container">
+    <div class="section-header"><span class="eyebrow">Our Foundation</span><h2 style="color:var(--navy);">Core Values</h2><div class="divider"></div></div>
+    <div class="grid-2">
+      <div style="padding:32px;border-left:4px solid var(--teal);border-radius:0 var(--radius) var(--radius) 0;background:#fff;box-shadow:var(--shadow);"><h3 style="color:var(--navy);margin-bottom:10px;">&#10084;&#65039; Compassionate Care</h3><p>Every patient is treated as family. We combine expertise with genuine empathy.</p></div>
+      <div style="padding:32px;border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;background:#fff;box-shadow:var(--shadow);"><h3 style="color:var(--navy);margin-bottom:10px;">&#128300; Medical Excellence</h3><p>Continuous investment in latest technology and ongoing education for all staff.</p></div>
+      <div style="padding:32px;border-left:4px solid #6366f1;border-radius:0 var(--radius) var(--radius) 0;background:#fff;box-shadow:var(--shadow);"><h3 style="color:var(--navy);margin-bottom:10px;">&#129309; Integrity &amp; Ethics</h3><p>Transparency and ethical practice at every level of our organization.</p></div>
+      <div style="padding:32px;border-left:4px solid var(--success);border-radius:0 var(--radius) var(--radius) 0;background:#fff;box-shadow:var(--shadow);"><h3 style="color:var(--navy);margin-bottom:10px;">&#127757; Community Commitment</h3><p>Free health camps and subsidized care for underprivileged patients.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

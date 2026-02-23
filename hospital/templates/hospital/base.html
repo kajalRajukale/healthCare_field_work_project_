@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}MedVita Hospital{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0d2545; --teal:#0f8a8a; --teal-lt:#16b1b1; --gold:#c9a84c;
+  --cream:#f9f5ef; --white:#fff; --gray-50:#f8fafc; --gray-100:#f1f5f9;
+  --gray-200:#e2e8f0; --gray-300:#cbd5e1; --gray-400:#94a3b8;
+  --gray-500:#64748b; --gray-700:#374151; --gray-900:#111827;
+  --danger:#e74c3c; --success:#27ae60; --warning:#f39c12;
+  --radius:12px; --shadow:0 4px 24px rgba(13,37,69,.10);
+  --shadow-lg:0 12px 48px rgba(13,37,69,.18);
+  --font-display:"Playfair Display",Georgia,serif;
+  --font-body:"DM Sans",system-ui,sans-serif;
+  --transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--gray-900);background:var(--white);line-height:1.65;font-size:16px}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.25}
+h1{font-size:clamp(2rem,5vw,3.5rem)}
+h2{font-size:clamp(1.6rem,3vw,2.4rem)}
+h3{font-size:1.4rem}
+p{color:var(--gray-700)}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:90px 0}
+.section-sm{padding:60px 0}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:var(--font-body);font-weight:600;font-size:15px;cursor:pointer;border:2px solid transparent;transition:var(--transition);white-space:nowrap;text-decoration:none}
+.btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn-primary:hover{background:#0a6f6f;border-color:#0a6f6f;transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,138,138,.35)}
+.btn-outline{background:transparent;color:var(--teal);border-color:var(--teal)}
+.btn-outline:hover{background:var(--teal);color:#fff;transform:translateY(-2px)}
+.btn-navy{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-navy:hover{background:#1a3a6b;transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-sm{padding:9px 20px;font-size:13px}
+.btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
+.section-header{text-align:center;margin-bottom:56px}
+.section-header .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.section-header h2{color:var(--navy);margin-bottom:16px}
+.section-header p{max-width:600px;margin:0 auto;font-size:17px}
+.divider{width:60px;height:4px;background:var(--gold);border-radius:2px;margin:16px auto 0}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--transition);overflow:hidden}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.badge{display:inline-block;padding:4px 12px;border-radius:50px;font-size:12px;font-weight:600}
+.badge-teal{background:#e0f5f5;color:var(--teal)}
+.badge-navy{background:#e8edf7;color:var(--navy)}
+.badge-gold{background:#fdf3e3;color:#9a7030}
+.badge-success{background:#e8f5ee;color:#1a6b3e}
+.badge-danger{background:#fdecea;color:#9b1f17}
+.badge-warning{background:#fef9e7;color:#7d5a0a}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-weight:500;margin-bottom:7px;font-size:14px;color:var(--gray-700)}
+.form-control{width:100%;padding:13px 16px;border:1.5px solid var(--gray-300);border-radius:8px;font-family:var(--font-body);font-size:15px;color:var(--gray-900);transition:var(--transition);background:var(--white)}
+.form-control:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,138,138,.12)}
+select.form-control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:20px;padding-right:40px}
+.alert{padding:14px 18px;border-radius:8px;margin-bottom:16px;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+.alert-success{background:#e8f5ee;color:#1a6b3e;border-left:4px solid var(--success)}
+.alert-error{background:#fdecea;color:#9b1f17;border-left:4px solid var(--danger)}
+.alert-info{background:#e0f5f5;color:#0d5555;border-left:4px solid var(--teal)}
+.alert-warning{background:#fef9e7;color:#7d5a0a;border-left:4px solid var(--warning)}
+.navbar{position:sticky;top:0;z-index:1000;background:var(--white);border-bottom:1px solid var(--gray-100);box-shadow:0 2px 16px rgba(13,37,69,.06)}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.navbar-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--navy)}
+.navbar-brand .logo-icon{width:40px;height:40px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.navbar-nav{display:flex;align-items:center;gap:4px;list-style:none}
+.navbar-nav a{padding:8px 14px;border-radius:8px;font-weight:500;font-size:14.5px;color:var(--gray-700);transition:var(--transition)}
+.navbar-nav a:hover,.navbar-nav a.active{color:var(--teal);background:#e0f5f5}
+.navbar-actions{display:flex;align-items:center;gap:10px}
+.emergency-bar{background:var(--navy);color:var(--white);padding:8px 0;font-size:13px}
+.emergency-bar .container{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.emergency-bar a{color:var(--gold);font-weight:600}
+.footer{background:var(--navy);color:rgba(255,255,255,.75);padding:70px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.12)}
+.footer h4{font-family:var(--font-body);font-weight:600;color:#fff;margin-bottom:18px;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer ul a{color:rgba(255,255,255,.65);font-size:14px;transition:var(--transition)}
+.footer ul a:hover{color:var(--gold)}
+.footer-bottom{padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.footer-logo{font-family:var(--font-display);font-size:1.4rem;color:#fff;margin-bottom:14px}
+.footer-desc{font-size:14px;line-height:1.7;margin-bottom:20px}
+.social-links{display:flex;gap:10px}
+.social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;transition:var(--transition);color:#fff}
+.social-btn:hover{background:var(--teal)}
+.page-hero{background:linear-gradient(135deg,var(--navy) 0%,#1a4a8a 100%);padding:80px 0;color:#fff;text-align:center}
+.page-hero h1{color:#fff;margin-bottom:12px}
+.page-hero p{color:rgba(255,255,255,.8);font-size:18px}
+.breadcrumb{display:flex;gap:8px;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.6);margin-top:16px}
+.breadcrumb a{color:var(--gold)}
+.dashboard-grid{display:grid;grid-template-columns:260px 1fr;gap:32px;min-height:calc(100vh - 180px)}
+.sidebar{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 0;height:fit-content;position:sticky;top:100px}
+.sidebar-nav{list-style:none}
+.sidebar-nav li a{display:flex;align-items:center;gap:12px;padding:13px 24px;font-weight:500;font-size:14.5px;color:var(--gray-700);transition:var(--transition)}
+.sidebar-nav li a:hover,.sidebar-nav li a.active{background:#e0f5f5;color:var(--teal);border-left:3px solid var(--teal)}
+.stat-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.stat-card .number{font-size:2.5rem;font-weight:700;color:var(--navy);font-family:var(--font-display)}
+.stat-card .label{font-size:14px;color:var(--gray-500);margin-top:4px}
+.stat-card .icon{font-size:2rem;margin-bottom:12px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--gray-100);font-size:14px}
+th{background:var(--gray-50);font-weight:600;color:var(--gray-700);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+tr:hover td{background:#f8fafc}
+.status-pending{color:var(--warning)}
+.status-confirmed{color:var(--success)}
+.status-cancelled{color:var(--danger)}
+.status-completed{color:var(--teal)}
+@media(max-width:1024px){.grid-4{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}.navbar-nav,.navbar-actions{display:none}.dashboard-grid{grid-template-columns:1fr}.sidebar{position:static}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.grid-4{grid-template-columns:1fr}.section{padding:60px 0}}
+{% block extra_css %}{% endblock %}
+</style>
+</head>
+<body>
+<div class="emergency-bar">
+  <div class="container">
+    <span>&#127973; MedVita Hospital &mdash; Excellence in Healthcare Since 1995</span>
+    <span>&#128680; Emergency: <a href="tel:+11234567890">+1 (123) 456-7890</a> &nbsp;|&nbsp; &#128222; Appointments: <a href="tel:+11234567891">+1 (123) 456-7891</a></span>
+  </div>
+</div>
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="/" class="navbar-brand">
+      <div class="logo-icon">&#10011;</div>MedVita
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/doctors/">Doctors</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/appointments/book/">Book Appointment</a></li>
+      <li><a href="/blog/">Health Blog</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      {% if user.is_authenticated %}
+        <a href="/patients/dashboard/" class="btn btn-outline btn-sm">&#128100; Dashboard</a>
+        <a href="/patients/logout/" class="btn btn-primary btn-sm">Logout</a>
+      {% else %}
+        <a href="/patients/login/" class="btn btn-outline btn-sm">Login</a>
+        <a href="/patients/register/" class="btn btn-primary btn-sm">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+{% if messages %}
+<div class="container" style="margin-top:16px;">
+  {% for message in messages %}
+  <div class="alert alert-{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}info{% endif %}">
+    {% if message.tags == 'success' %}&#9989;{% elif message.tags == 'error' %}&#10060;{% elif message.tags == 'warning' %}&#9888;{% else %}&#8505;{% endif %}
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% block content %}{% endblock %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">&#10011; MedVita Hospital</div>
+        <p class="footer-desc">Providing compassionate, world-class healthcare to our community since 1995. Your health is our highest priority.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">t</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">yt</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/doctors/">Our Doctors</a></li>
+          <li><a href="/appointments/book/">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Departments</h4>
+        <ul>
+          <li><a href="/doctors/?specialty=Cardiology">Cardiology</a></li>
+          <li><a href="/doctors/?specialty=Neurology">Neurology</a></li>
+          <li><a href="/doctors/?specialty=Orthopedics">Orthopedics</a></li>
+          <li><a href="/doctors/?specialty=Oncology">Oncology</a></li>
+          <li><a href="/doctors/?specialty=Gynecology">Gynecology</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Info</h4>
+        <ul>
+          <li><a href="#">&#128205; 123 Health Street, NY 10001</a></li>
+          <li><a href="tel:+11234567890">&#128222; +1 (123) 456-7890</a></li>
+          <li><a href="mailto:info@medvita.com">&#9993; info@medvita.com</a></li>
+          <li><a href="#">&#128336; Mon-Fri: 8am - 8pm</a></li>
+          <li><a href="#">&#128680; Emergency: 24/7</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 MedVita Hospital. All rights reserved.</span>
+      <span>Privacy Policy &middot; Terms of Service &middot; Accessibility</span>
+    </div>
+  </div>
+</footer>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

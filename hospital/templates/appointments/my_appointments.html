@@ -1,0 +1,44 @@
+{% extends 'hospital/base.html' %}
+{% block title %}My Appointments - MedVita{% endblock %}
+{% block content %}
+<div style="background:linear-gradient(135deg,var(--navy),#1a4a8a);padding:40px 0;color:#fff;">
+  <div class="container"><h2 style="color:#fff;">My Appointments</h2><p style="color:rgba(255,255,255,.75);">View and manage all your appointments</p></div>
+</div>
+<section class="section-sm">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+      <h3 style="color:var(--navy);">All Appointments</h3>
+      <a href="/appointments/book/" class="btn btn-primary btn-sm">&#10133; Book New</a>
+    </div>
+    <div class="card">
+      {% if appointments %}
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Doctor</th><th>Date</th><th>Time</th><th>Type</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for appt in appointments %}
+            <tr>
+              <td><strong>{{ appt.doctor.full_name }}</strong><br><span style="font-size:12px;color:var(--gray-500);">{{ appt.doctor.specialization }}</span></td>
+              <td>{{ appt.appointment_date }}</td>
+              <td>{{ appt.appointment_time }}</td>
+              <td><span class="badge badge-teal">{{ appt.get_appointment_type_display }}</span></td>
+              <td>{{ appt.reason|truncatechars:30 }}</td>
+              <td><strong class="status-{{ appt.status }}">{{ appt.get_status_display }}</strong></td>
+              <td>{% if appt.status == "pending" or appt.status == "confirmed" %}<a href="/appointments/{{ appt.id }}/cancel/" class="btn btn-danger btn-sm" onclick="return confirm('Cancel this appointment?')">Cancel</a>{% else %}--{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div style="padding:60px;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:16px;">&#128197;</div>
+        <h3 style="color:var(--navy);margin-bottom:10px;">No appointments yet</h3>
+        <p style="color:var(--gray-500);margin-bottom:20px;">Book your first appointment with one of our specialists.</p>
+        <a href="/appointments/book/" class="btn btn-primary">Book Appointment</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

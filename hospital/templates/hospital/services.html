@@ -1,0 +1,30 @@
+{% extends 'hospital/base.html' %}
+{% block title %}Services - MedVita Hospital{% endblock %}
+{% block content %}
+<div class="page-hero"><div class="container"><h1>Our Medical Services</h1><p>Comprehensive, cutting-edge care across 20+ specialties</p><div class="breadcrumb"><a href="/">Home</a> / Services</div></div></div>
+<section class="section">
+  <div class="container">
+    <div class="section-header"><span class="eyebrow">What We Offer</span><h2 style="color:var(--navy);">World-Class Specialties</h2><div class="divider"></div></div>
+    <div class="grid-3">
+      {% for service in services %}
+      <div class="card" style="padding:36px 28px;">
+        <div style="width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#e0f5f5,#b8ecec);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin-bottom:20px;">{{ service.icon }}</div>
+        <h3 style="color:var(--navy);margin-bottom:10px;">{{ service.name }}</h3>
+        <p>{{ service.desc }}</p>
+        <a href="/doctors/?specialty={{ service.name }}" style="display:inline-flex;align-items:center;gap:6px;color:var(--teal);font-weight:600;font-size:14px;margin-top:16px;">Find Doctors &rarr;</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <div class="section-header"><span class="eyebrow">Special Programs</span><h2 style="color:var(--navy);">Health Packages</h2><div class="divider"></div></div>
+    <div class="grid-3">
+      <div class="card" style="padding:32px;border-top:4px solid var(--teal);"><h3 style="color:var(--navy);margin-bottom:12px;">&#129770; Executive Health Check</h3><p style="margin-bottom:16px;">Comprehensive 40+ test health package with doctor consultation, ECG, and full body screening.</p><div style="font-size:1.5rem;font-weight:700;color:var(--teal);font-family:var(--font-display);">$299</div><a href="/appointments/book/" class="btn btn-primary" style="margin-top:16px;width:100%;justify-content:center;">Book Now</a></div>
+      <div class="card" style="padding:32px;border-top:4px solid var(--gold);"><h3 style="color:var(--navy);margin-bottom:12px;">&#129920; Maternity Care Package</h3><p style="margin-bottom:16px;">Complete ante-natal care, delivery, and post-natal support with our OB/GYN team.</p><div style="font-size:1.5rem;font-weight:700;color:var(--gold);font-family:var(--font-display);">$1,499</div><a href="/appointments/book/" class="btn btn-gold" style="margin-top:16px;width:100%;justify-content:center;">Enquire Now</a></div>
+      <div class="card" style="padding:32px;border-top:4px solid var(--navy);"><h3 style="color:var(--navy);margin-bottom:12px;">&#129728; Cardiac Health Package</h3><p style="margin-bottom:16px;">Complete cardiac evaluation with ECG, Echo, stress test, and specialist consultation.</p><div style="font-size:1.5rem;font-weight:700;color:var(--navy);font-family:var(--font-display);">$399</div><a href="/appointments/book/" class="btn btn-navy" style="margin-top:16px;width:100%;justify-content:center;">Book Now</a></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

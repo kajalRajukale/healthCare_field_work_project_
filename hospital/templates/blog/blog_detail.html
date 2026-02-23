@@ -1,0 +1,20 @@
+{% extends 'hospital/base.html' %}
+{% block title %}{{ post.title }} - MedVita{% endblock %}
+{% block content %}
+<div class="page-hero"><div class="container"><h1>{{ post.title }}</h1><p>{{ post.created_at|date:"F d, Y" }} {% if post.category %}&middot; {{ post.category.name }}{% endif %}</p><div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {{ post.title|truncatechars:40 }}</div></div></div>
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <div class="card" style="padding:48px;">
+      <div style="font-size:14px;color:var(--gray-500);margin-bottom:24px;display:flex;gap:16px;flex-wrap:wrap;">
+        <span>&#128197; {{ post.created_at|date:"M d, Y" }}</span>
+        {% if post.author %}<span>&#128100; {{ post.author.get_full_name }}</span>{% endif %}
+        <span>&#128065; {{ post.views_count }} views</span>
+      </div>
+      <div style="line-height:1.8;color:var(--gray-700);">{{ post.content|linebreaks }}</div>
+      <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--gray-100);">
+        <a href="/blog/" class="btn btn-outline">&larr; Back to Blog</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
