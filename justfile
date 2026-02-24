@@ -1,5 +1,7 @@
+MANAGE := "python manage.py "
+
 default:
-	cat justfile
+	@just -l
 
 setup:
 	python3.12 -m venv .venv
@@ -13,6 +15,9 @@ install-pyproject:
 	uv pip install -r pyproject.toml
 
 serve:
-	python manage.py runserver
+	{{MANAGE}} runserver
+
+migrate:
+	{{MANAGE}} migrate
 
 run: serve
