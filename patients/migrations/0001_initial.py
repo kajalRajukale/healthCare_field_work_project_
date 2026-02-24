@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,25 +14,74 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Patient',
+            name="Patient",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_of_birth', models.DateField(blank=True, null=True)),
-                ('gender', models.CharField(blank=True, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], max_length=1)),
-                ('phone', models.CharField(blank=True, max_length=20)),
-                ('address', models.TextField(blank=True)),
-                ('blood_group', models.CharField(blank=True, choices=[('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'), ('AB+', 'AB+'), ('AB-', 'AB-'), ('O+', 'O+'), ('O-', 'O-')], max_length=5)),
-                ('emergency_contact_name', models.CharField(blank=True, max_length=100)),
-                ('emergency_contact_phone', models.CharField(blank=True, max_length=20)),
-                ('allergies', models.TextField(blank=True)),
-                ('medical_history', models.TextField(blank=True)),
-                ('profile_image', models.ImageField(blank=True, null=True, upload_to='patients/profiles/')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='patient_profile', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_of_birth", models.DateField(blank=True, null=True)),
+                (
+                    "gender",
+                    models.CharField(
+                        blank=True,
+                        choices=[("M", "Male"), ("F", "Female"), ("O", "Other")],
+                        max_length=1,
+                    ),
+                ),
+                ("phone", models.CharField(blank=True, max_length=20)),
+                ("address", models.TextField(blank=True)),
+                (
+                    "blood_group",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("A+", "A+"),
+                            ("A-", "A-"),
+                            ("B+", "B+"),
+                            ("B-", "B-"),
+                            ("AB+", "AB+"),
+                            ("AB-", "AB-"),
+                            ("O+", "O+"),
+                            ("O-", "O-"),
+                        ],
+                        max_length=5,
+                    ),
+                ),
+                (
+                    "emergency_contact_name",
+                    models.CharField(blank=True, max_length=100),
+                ),
+                (
+                    "emergency_contact_phone",
+                    models.CharField(blank=True, max_length=20),
+                ),
+                ("allergies", models.TextField(blank=True)),
+                ("medical_history", models.TextField(blank=True)),
+                (
+                    "profile_image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="patients/profiles/"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="patient_profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'db_table': 'patients',
+                "db_table": "patients",
             },
         ),
     ]

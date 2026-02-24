@@ -5,35 +5,78 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('doctors', '0001_initial'),
-        ('patients', '0001_initial'),
+        ("doctors", "0001_initial"),
+        ("patients", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Appointment',
+            name="Appointment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('appointment_date', models.DateField()),
-                ('appointment_time', models.TimeField()),
-                ('appointment_type', models.CharField(choices=[('in_person', 'In Person'), ('telemedicine', 'Telemedicine')], default='in_person', max_length=20)),
-                ('status', models.CharField(choices=[('pending', 'Pending'), ('confirmed', 'Confirmed'), ('cancelled', 'Cancelled'), ('completed', 'Completed')], default='pending', max_length=20)),
-                ('reason', models.TextField(blank=True)),
-                ('symptoms', models.TextField(blank=True)),
-                ('notes', models.TextField(blank=True)),
-                ('prescription', models.TextField(blank=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('doctor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to='doctors.doctor')),
-                ('patient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to='patients.patient')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("appointment_date", models.DateField()),
+                ("appointment_time", models.TimeField()),
+                (
+                    "appointment_type",
+                    models.CharField(
+                        choices=[
+                            ("in_person", "In Person"),
+                            ("telemedicine", "Telemedicine"),
+                        ],
+                        default="in_person",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("pending", "Pending"),
+                            ("confirmed", "Confirmed"),
+                            ("cancelled", "Cancelled"),
+                            ("completed", "Completed"),
+                        ],
+                        default="pending",
+                        max_length=20,
+                    ),
+                ),
+                ("reason", models.TextField(blank=True)),
+                ("symptoms", models.TextField(blank=True)),
+                ("notes", models.TextField(blank=True)),
+                ("prescription", models.TextField(blank=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "doctor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="appointments",
+                        to="doctors.doctor",
+                    ),
+                ),
+                (
+                    "patient",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="appointments",
+                        to="patients.patient",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'appointments',
-                'ordering': ['-appointment_date', '-appointment_time'],
+                "db_table": "appointments",
+                "ordering": ["-appointment_date", "-appointment_time"],
             },
         ),
     ]

@@ -20,4 +20,8 @@ serve:
 migrate:
 	{{MANAGE}} migrate
 
+
+pre-commit:
+	pre-commit run -a
+
 run: serve

@@ -11,8 +11,8 @@ def my_reports(request):
         patient = request.user.patient_profile
     except Patient.DoesNotExist:
         patient = Patient.objects.create(user=request.user)
-    reports = patient.medical_reports.select_related('doctor').order_by('-report_date')
-    return render(request, 'reports/my_reports.html', {'reports': reports})
+    reports = patient.medical_reports.select_related("doctor").order_by("-report_date")
+    return render(request, "reports/my_reports.html", {"reports": reports})
 
 
 @login_required
